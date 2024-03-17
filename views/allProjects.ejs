@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+
+    <link rel="stylesheet" type="text/css"  href="/css/allProjects.css">
+    <link rel="stylesheet" type="text/css"  href="/css/bottomNav.css">
+    <title>Project manager</title>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+</head>
+
+<body>
+<!--Header-->
+<nav class="navbar bg-white shadow-sm border  p-0">
+<div class="container d-block p-2">
+    <div>
+        <ul class="nav">
+            <li class="d-flex ">
+              <h1  class="title p-1 fw-bold">My Projects</h1>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul class="nav ">
+            <li class="nav-item "  >
+                <a href=""><p id="all-projects" class="active nav-link pb-0 mb-0 pl-2 text-dark text-muted">All</p></a>
+            </li>
+            <li class="nav-item" >
+                <p id="behind-projects" class="nav-link pb-0 mb-0 pl-2 text-dark text-muted">Behind</p>
+            </li>
+            <li class="nav-item" >
+                <p id="completed-projects" class="nav-link pb-0 mb-0 pl-2 text-dark text-muted">Completed</p>
+            </li>
+            <li class="nav-item" >
+                <p id="project-report" class="nav-link pb-0 mb-0 pl-2 text-dark text-muted">Report</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</nav>
+
+<%- include('partials/bottomNav') %>
+
+
+
+<!--render all projects-->
+<div class="container main-container">
+    <% projects.forEach(project => { %>
+        <div id="<%= project._id%>" data-id="<%=project._id%>" class="project-container row mt-3 d-flex bg-white shadow-sm align-items-center px-3">
+            <div class="d-flex ">
+                <!--<div class="icon m-4 ">
+                    <i class="fa-solid text-danger fa-2xl fa-list-check"></i>
+                </div>-->
+                <div class="p-1">
+                    <div class="project-title pb-2 font-weight-bold">
+                       <p class="m-0 d-inline-block text-truncate" ><%= project.project_name %></p>
+                    </div>
+                    <div class="text-muted members">
+                        <p class="m-0">Memebers: <%= project.members.length %></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="due text-muted ml-auto">
+                <p class="m-0">due:<%
+                            const dueDate = new Date(project.end_date);
+                            const year = dueDate.getFullYear();
+                            const month = String(dueDate.getMonth() + 1).padStart(2, '0');
+                            const day = String(dueDate.getDate()).padStart(2, '0');
+                            const res =  `${year}-${month}-${day}`;%> <%=res%>  </p>
+            </div>
+        </div>
+
+        <% }); %>
+
+</div>
+
+
+
+
+<script src="/javascript/filterProject.js"></script>
+<script src="/javascript/bottomNav.js"></script>
+
+<!--fontawesome-->
+<script src="https://kit.fontawesome.com/a0f7adf235.js" crossorigin="anonymous"></script>
+
+<!--bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+</html>

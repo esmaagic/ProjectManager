@@ -1,0 +1,43 @@
+.title{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+body{
+    background-color:  	#F8F9FA;
+}
+
+a{
+    font-size: 0.8rem;
+}
+p{
+    font-size: 1rem;
+    max-width: 190px;
+}
+
+
+
+.project-container{
+    cursor: pointer;
+}
+
+@media (min-width: 576px) {
+    .title{
+        font-size: 1.3rem;
+    }
+    p{
+        max-width: 300px;
+    }
+
+}
+
+
+@media (min-width: 767px) {
+    .title{
+        font-size: 1.5rem;
+    }
+    a{
+        font-size: 1rem;
+    }
+
+
+}

@@ -1,0 +1,27 @@
+
+<ul class="nav nav-style text-white navbar fixed-bottom navbar-dark bg-dark justify-content-center">
+    <%if(user.position!== 1 ){%>
+    <li class="nav-item  ">
+        <a class="nav-link text-light  navL " href="/project/getUserProjects">Projects</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link navL text-light" href="/task/getUserTasks">Tasks</a>
+    </li>
+        <%}%>
+    <li class="nav-item">
+        <a class="nav-link navL text-light" href="/inbox">Inbox</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link navL text-light " href="/user/account">Account</a>
+    </li>
+    <%if(user.position=== 1 ){%>
+        <li class="nav-item">
+            <a class="nav-link navL text-light " href="/supervisors/getSupervisorPan">AdminPan</a>
+        </li>
+    <%}else if(user.position === 2){%>
+    <li class="nav-item">
+        <a class="nav-link navL text-light " href="/supervisors/getSupervisorPan">ManagerPan</a>
+    </li>
+    <%}%>
+</ul>
+

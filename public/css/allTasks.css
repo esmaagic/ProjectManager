@@ -1,0 +1,22 @@
+.title{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+body{
+    background-color:  	#F8F9FA;
+}
+
+
+@media (min-width: 576px) {
+    .title {
+        font-size: 1.3rem;
+
+    }
+}
+
+
+@media (min-width: 767px) {
+    .title{
+        font-size: 1.5rem;
+    }
+}

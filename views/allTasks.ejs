@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/bottomNav.css">
+    <link rel="stylesheet" href="/css/allTasks.css">
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <title>Project manager</title>
+</head>
+<body>
+
+<nav class="navbar bg-white shadow-sm border  p-0">
+    <div class="container d-block p-2">
+        <div>
+            <ul class="nav">
+                <li class="d-flex ">
+                    <h1 class="title p-1 fw-bold">My Tasks</h1>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="nav ">
+                <li class="nav-item "  id="all-tasks">
+                    <a href=""><p class="nav-link active pb-0 mb-0 pl-2 text-dark text-muted">All</p></a>
+                </li>
+                <li class="nav-item" id="behind-tasks">
+                    <p class="nav-link pb-0 mb-0 pl-2 text-dark text-muted">Behind</p>
+                </li>
+                <li class="nav-item" id="completed-tasks">
+                    <p class="nav-link pb-0 mb-0 pl-2 text-dark text-muted"  >Completed</p>
+                </li>
+                <li class="nav-item" id="tasks-report">
+                    <p class="nav-link pb-0 mb-0 pl-2 text-dark text-muted"  >Report</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+
+<div class="container wrapper-container p-0 mt-3">
+    <div class="accordion main-container" id="accordionExample">
+        <% tasks.forEach((task, index) => { %>
+            <div class="shadow-sm my-3 p-0">
+                <div class="card mx-0 border-0">
+                    <div class="card-header py-0 d-flex align-items-center justify-content-between bg-white" id="heading<%= index %>">
+                        <div class="d-flex">
+                            <div class="p-1">
+                                <div class="task-title font-weight-bold">
+                                    <p class="m-0"><%= task.task_name %></p>
+                                </div>
+                                <div class="text-muted members">
+                                    <p class="m-0">Members: <%=task.members.length%> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- Update data-target and aria-controls attributes -->
+                            <button class="btn bg-white text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse<%= index %>" aria-expanded="false" aria-controls="collapse<%= index %>">
+                                <i class="fa-solid fa-ellipsis p-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Update the id attribute for the collapsible content -->
+                    <div id="collapse<%= index %>" class="collapse" aria-labelledby="heading<%= index %>" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div>Task description: <%=task.description%></div>
+                            <div>task due:
+                                <%
+                                    const dueDate = new Date(task.end_date);
+                                    const year = dueDate.getFullYear();
+                                    const month = String(dueDate.getMonth() + 1).padStart(2, '0');
+                                    const day = String(dueDate.getDate()).padStart(2, '0');
+                                    const res =  `${year}-${month}-${day}`;%> <%=res%>
+
+                            </div>
+
+
+                            <div class="mt-2">
+                                <form action="/logTime/<%=task.project_id._id%>/<%=task._id%>" method="post">
+                                    <label for="">Log working time: </label>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <input type="number" class="form-control p-1 py-0 " id="hours" name="hours" min="0" placeholder="hours:">
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" class="form-control p-1 py-0 " id="minutes" name="minutes" min="0"  max="59" placeholder="minutes:">
+                                        </div>
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </form>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+
+</div>
+
+
+
+
+<!--bottom Nav-->
+<%- include('partials/bottomNav') %>
+
+<script src="/javascript/bottomNav.js"></script>
+<script src="/javascript/filterTask.js"></script>
+
+<!--fontawesome-->
+<script src="https://kit.fontawesome.com/a0f7adf235.js" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+</html>

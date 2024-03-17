@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/bottomNav.css">
+    <link rel="stylesheet" href="/css/account.css">
+
+    <title>Project manager</title>
+</head>
+<body>
+<!--bottom Nav-->
+<%- include('partials/bottomNav') %>
+
+<nav class="navbar bg-white shadow-sm border  p-0">
+    <div class="container">
+        <h1 class="p-2">Account</h1>
+    </div>
+</nav>
+
+
+<div class="container ">
+    <div class="container-fluid mt-3 personal-info">
+        <p class="font-weight-bold">Personal info</p>
+        <div class="border p-1 bg-white"><p class="p-1 m-0"><span class="text-muted">Username:</span> @<%=user.username%></p></div>
+        <div class="border p-1 bg-white"><p class="p-1 m-0"><span class="text-muted">Email:</span> <%=user.email%></p></div>
+    </div>
+
+    <div class="container mt-3 company-info">
+        <p class="font-weight-bold">Settings</p>
+        <button class=" btn text-left bg-white btn-block border" data-toggle="modal" data-target="#changePass" >Change password</button>
+
+        <div class="modal fade " id="changePass" tabindex="-1" aria-labelledby="changePass" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePass">Change password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/user/changePassword" id="change-password-form" method="post">
+                            <div class="form-group">
+                                <input type="password" name="old_password" class="form-control" placeholder="Old password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="new_password" class="form-control" placeholder="New password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+            <button onclick="deleteAccount('<%= user.username %>')" class="font-weight-bold btn text-left text-danger bg-white btn-block border" >Delete account</button>
+
+    </div>
+
+    <div class="container mt-3 log-out">
+
+        <form action="/auth/logout" method="post">
+            <button class="font-weight-bold btn text-left bg-white btn-block border" >Log out</button>
+        </form>
+
+
+    </div>
+</div>
+
+
+
+<script>
+    async function deleteAccount(username) {
+        try {
+            let confirmation = confirm("Are you sure you want to delete this member?");
+            if(confirmation){
+                const response = await fetch(`/user/deleteUser/${username}`, {
+                    method: 'DELETE' // Assuming DELETE method is used for deletion
+                    // Additional headers or body data can be added if required
+                });
+
+                if (response.ok) {
+                    // Project successfully deleted, you can update the UI or take other actions as needed
+                    console.log(`User with username ${username} deleted successfully.`);
+                    window.location.href = 'http://localhost:3000/'
+                } else {
+                    // Handle error scenarios if the deletion fails
+                    console.error('Failed to delete this user.');
+                }
+            }
+
+
+        } catch (error) {
+            console.error('An error occurred while deleting the user:', error);
+        }
+
+    }
+</script>
+
+
+<script src="/javascript/bottomNav.js"></script>
+
+
+<!--fontawesome-->
+<script src="https://kit.fontawesome.com/a0f7adf235.js" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+</html>

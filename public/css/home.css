@@ -1,0 +1,9 @@
+
+    /* Custom CSS for vertical centering */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background-color:  	#F8F9FA;
+}
