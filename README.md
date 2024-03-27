@@ -1,3 +1,6 @@
+DISCLAIMER: this app was created while learning Node.js, therefore it has nowhere near clean or optimal code
+
+
 Project management app 
 
 This app includes:
