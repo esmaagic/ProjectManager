@@ -1,4 +1,6 @@
-Project management app includes
+Project management app 
+
+This app includes:
 
 -User authentication (session cookies)
 
@@ -6,5 +8,5 @@ Project management app includes
 
 -chat functionallity (scoket.io)
 
--RESTful api
+-RESTful api (Node.js and Expresss) - creating and managing users, projects and tasks
 
