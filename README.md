@@ -3,7 +3,7 @@ DISCLAIMER: this app was created while learning Node.js, therefore it has nowher
 
 Project management app 
 
-This app includes:
+App includes:
 
 -User authentication (session cookies)
 
