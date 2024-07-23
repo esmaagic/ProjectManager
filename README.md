@@ -11,5 +11,5 @@ App includes:
 
 -chat functionallity (scoket.io)
 
--RESTful api (Node.js and Expresss) - creating and managing users, projects and tasks
+-Api (Node.js and Expresss) - creating and managing users, projects and tasks
 
